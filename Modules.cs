@@ -6,16 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MUpdate
+namespace ExpertLoop
 {
-    public class InfoModule : ModuleBase<SocketCommandContext>
+
+    public class ExtraModule : ModuleBase<SocketCommandContext>
+    {
+        [Command("test")]
+        public async Task TestAsync()
+        {
+            await Context.Channel.SendMessageAsync("It's working. " + Context.User.Mention);
+        }
+    }
+
+    public class CommandModule : ModuleBase<SocketCommandContext>
     {
         [Command("say")]
         [Summary("Echos a message.")]
         [Alias("repeat")]
         public async Task SayAsync([Remainder] [Summary("The text to echo")] string echo)
         {
-            // ReplyAsync is a method on ModuleBase
             await ReplyAsync(echo);
         }
 
@@ -24,9 +33,16 @@ namespace MUpdate
         [Alias("f", "flip", "flip coin")]
         public async Task FlipCoinAsync()
         {
-            // ReplyAsync is a method on ModuleBase
             await ReplyAsync((new Random().Next(100) >= 50) ? "Heads" : "Tails");
-   
         }
+
+        [Command("help")]
+        [Summary("Help with commands.")]
+        [Alias("h")]
+        public async void HelpAsync()
+        {
+            await Context.Channel.SendMessageAsync("The following commands are listed.");
+        }
+
     }
 }
