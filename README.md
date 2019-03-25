@@ -70,6 +70,3 @@ Experimental AI coding
 >Aliases: surrender  
 >Description: Checks if the user is enrolled in the game, (if the user is) end game.   
 >  
-
-`Adding images of Discordbot`
-
